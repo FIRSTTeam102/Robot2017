@@ -19,8 +19,8 @@ public class Shooter extends Subsystem {
 	}
 	
 	public void shoot() {
-		t4CANTalon.set(-RobotMap.SHOOTER_SPEED);
-		t5CANTalon.set(RobotMap.SHOOTER_SPEED);
+		t4CANTalon.set(RobotMap.SHOOTER_SPEED);
+		t5CANTalon.set(-RobotMap.SHOOTER_SPEED);
 	}
 	
 	public void stopShooting() {

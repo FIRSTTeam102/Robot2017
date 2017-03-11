@@ -4,7 +4,7 @@ import org.usfirst.frc.team102.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/*public class Turn extends Command {
+public class Turn extends Command {
 	protected double degrees;
 	
 	public Turn(double degrees) {
@@ -22,4 +22,4 @@ import edu.wpi.first.wpilibj.command.Command;
 	protected boolean isFinished() { return Robot.driveTrain.onTarget(); }
 	
 	public void end() { Robot.driveTrain.disable(); }
-}*/
+}

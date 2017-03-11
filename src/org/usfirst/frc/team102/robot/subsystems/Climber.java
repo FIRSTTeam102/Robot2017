@@ -23,8 +23,34 @@ public class Climber extends Subsystem implements CommandUpdate.IUpdate {
 		setDefaultCommand(new CommandUpdate(this, NAME));
 	}
 	
-	public void update() {
-		double val = Robot.oi.getDriverJSAxis(RobotMap.xBoxRightTrigger);
-		climberTal.set(-val);
+	public void climbFast(){
+		
+		climberTal.set(-1);
+		
 	}
+	
+	public void climbSlow(){
+		
+		climberTal.set(-.20);
+		
+	}
+	
+	public void climberStops(){
+		
+		climberTal.set(0);
+		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+//	public void update() {
+//		double val = Robot.oi.getDriverJSAxis(RobotMap.xBoxRightTrigger);
+//		climberTal.set(-val);
+//		System.out.println(val);
+//	}
+	
 }

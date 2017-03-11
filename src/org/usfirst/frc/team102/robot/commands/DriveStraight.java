@@ -4,7 +4,7 @@ import org.usfirst.frc.team102.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/*public class DriveStraight extends Command {
+public class DriveStraight extends Command {
 	protected double dist;
 	protected boolean reverse;
 	
@@ -26,4 +26,4 @@ import edu.wpi.first.wpilibj.command.Command;
 		Robot.driveTrain.disableDriveStraight();
 		Robot.driveTrain.resetEncoder();
 	}
-}*/
+}

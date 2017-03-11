@@ -1,5 +1,7 @@
 package org.usfirst.frc.team102.robot;
 
+import org.usfirst.frc.team102.robot.commands.Autonomous;
+import org.usfirst.frc.team102.robot.commands.BasicAutonomous;
 import org.usfirst.frc.team102.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -14,7 +16,7 @@ public class Robot extends IterativeRobot {
 	public static IntakeRoller intakeRoller;
 	public static Shooter shooter;
 	public static HopperServo servo;
-	//public static Climber climber;
+	public static Climber climber;
 	
 	protected Command autonomousCommand;
 	
@@ -23,11 +25,11 @@ public class Robot extends IterativeRobot {
 		intakeRoller = new IntakeRoller();
 		shooter = new Shooter();
 		servo = new HopperServo();
-		//climber = new Climber();
+		climber = new Climber();
 		
 		oi = new OI();
 		
-		// autonomousCommand = new Autonomous();
+		autonomousCommand = new Autonomous();
 		
 		// Until Vision API is transferred...
 		CameraServer.getInstance().startAutomaticCapture();

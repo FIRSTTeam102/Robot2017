@@ -38,55 +38,58 @@ public class OI {
 		xBoxA = new JoystickButton(xBoxDriver, RobotMap.xBoxAIndex);
 		xBoxA.whenPressed(new StartShooting());
 		xBoxA.whenReleased(new StopShooting());
-		
+
 		xBoxB = new JoystickButton(xBoxDriver, RobotMap.xBoxBIndex);
-		
+
 		xBoxY = new JoystickButton(xBoxDriver, RobotMap.xBoxYIndex);
+		xBoxY.whenPressed(new ClimbSlow());
+		xBoxY.whenReleased(new ClimbStop());
 		
 		xBoxX = new JoystickButton(xBoxDriver, RobotMap.xBoxXIndex);
+		xBoxX.whenPressed(new ClimbFast());
+		xBoxX.whenReleased(new ClimbStop());
 		
 		xBoxRightBump = new JoystickButton(xBoxDriver, RobotMap.xBoxRightBumperIndex);
 		xBoxRightBump.whenPressed(new SetIntake(true));
 		xBoxRightBump.whenReleased(new StopIntake());
-		
+
 		xBoxLeftBump = new JoystickButton(xBoxDriver, RobotMap.xBoxLeftBumperIndex);
 		xBoxLeftBump.whenPressed(new SetIntake(false));
 		xBoxLeftBump.whenReleased(new StopIntake());
-		
+
 		xBoxStart = new JoystickButton(xBoxDriver, RobotMap.xBoxStartButtonIndex);
 		xBoxStart.whenPressed(new SetServo(true));
-		
+
 		xBoxBack = new JoystickButton(xBoxDriver, RobotMap.xBoxBackButtonIndex);
 		xBoxBack.whenPressed(new SetServo(false));
-		
+
 		xBoxRightJoyPress = new JoystickButton(xBoxDriver, RobotMap.xBoxRightJoystickPressIndex);
-		
+
 		xBoxLeftJoyPress = new JoystickButton(xBoxDriver, RobotMap.xBoxLeftJoystickPressIndex);
 
-
 		// Test Joystick Button Action
-			xBoxTest = new Joystick(RobotMap.xBoxTestJoystick);
+		xBoxTest = new Joystick(RobotMap.xBoxTestJoystick);
 
-			xBoxTestA = new JoystickButton(xBoxTest, RobotMap.xBoxAIndex);
-			
-			xBoxTestB = new JoystickButton(xBoxTest, RobotMap.xBoxBIndex);
-			
-			xBoxTestX = new JoystickButton(xBoxTest, RobotMap.xBoxXIndex);
-			
-			xBoxTestY = new JoystickButton(xBoxTest, RobotMap.xBoxYIndex);
-			
-			xBoxTestRightBump = new JoystickButton(xBoxTest, RobotMap.xBoxRightBumperIndex);
-			
-			xBoxTestLeftBump = new JoystickButton(xBoxTest, RobotMap.xBoxLeftBumperIndex);
-			
-			xBoxTestStart = new JoystickButton(xBoxTest, RobotMap.xBoxStartButtonIndex);
-			
-			xBoxTestBack = new JoystickButton(xBoxTest, RobotMap.xBoxBackButtonIndex);
-			
-			xBoxTestRightJoyPress = new JoystickButton(xBoxTest, RobotMap.xBoxRightJoystickPressIndex);
-			
-			xBoxTestLeftJoyPress = new JoystickButton(xBoxTest, RobotMap.xBoxLeftJoystickPressIndex);
-		
+		xBoxTestA = new JoystickButton(xBoxTest, RobotMap.xBoxAIndex);
+
+		xBoxTestB = new JoystickButton(xBoxTest, RobotMap.xBoxBIndex);
+
+		xBoxTestX = new JoystickButton(xBoxTest, RobotMap.xBoxXIndex);
+
+		xBoxTestY = new JoystickButton(xBoxTest, RobotMap.xBoxYIndex);
+
+		xBoxTestRightBump = new JoystickButton(xBoxTest, RobotMap.xBoxRightBumperIndex);
+
+		xBoxTestLeftBump = new JoystickButton(xBoxTest, RobotMap.xBoxLeftBumperIndex);
+
+		xBoxTestStart = new JoystickButton(xBoxTest, RobotMap.xBoxStartButtonIndex);
+
+		xBoxTestBack = new JoystickButton(xBoxTest, RobotMap.xBoxBackButtonIndex);
+
+		xBoxTestRightJoyPress = new JoystickButton(xBoxTest, RobotMap.xBoxRightJoystickPressIndex);
+
+		xBoxTestLeftJoyPress = new JoystickButton(xBoxTest, RobotMap.xBoxLeftJoystickPressIndex);
+
 	}
 
 	public double getDriverJSAxis(int id) {
