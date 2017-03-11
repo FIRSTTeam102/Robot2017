@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class Autonomous extends CommandGroup {
 	
-	public Autonomous() {
+	/*public Autonomous() {
 		super("Autonomous root command");
 		
 		DigitalInput onOffSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO);
@@ -40,13 +40,13 @@ public class Autonomous extends CommandGroup {
 			
 			status = "enabled, traveling to the ";
 			
-			//addSequential(new DriveStraight());
+			addSequential(new DriveStraight(RobotMap.AUTO_DRIVE_DIST));
 			
 			switch(pos) {
 				case LEFT: {
 					status += "left";
 					
-					//addSequential(new Turn(RobotMap.autoTurnLeft));
+					addSequential(new Turn(RobotMap.AUTO_TURN_LEFT));
 					break;
 				}
 				
@@ -58,17 +58,17 @@ public class Autonomous extends CommandGroup {
 				case RIGHT: {
 					status += "right";
 					
-					//addSequential(new Turn(RobotMap.autoTurnRight));
+					addSequential(new Turn(RobotMap.AUTO_TURN_RIGHT));
 					break;
 				}
 			}
 			
-			//addSequential(new PlaceGear());
+			addSequential(new DriveStraight(RobotMap.AUTO_PLACE_GEAR_REVERSE_DIST, true));
 			
 			if(shoot) {
 				status += ", and shooting";
 				
-				addSequential(new WaitCommand(RobotMap.CONFIG_AUTO_WAIT));
+				addSequential(new WaitCommand(RobotMap.AUTO_WAIT));
 				
 				switch(pos) {
 					case LEFT: {
@@ -86,7 +86,7 @@ public class Autonomous extends CommandGroup {
 						break;
 					}
 					
-					//addSequential(new CommandShoot());
+					//addSequential(new Shoot());
 				}
 			}
 		} else status = "disabled";
@@ -94,5 +94,5 @@ public class Autonomous extends CommandGroup {
 		System.out.println("Autonomous is " + status + ".");
 	}
 	
-	public static enum EnumPosition { LEFT, RIGHT, CENTER; }
+	public static enum EnumPosition { LEFT, RIGHT, CENTER; }*/
 }

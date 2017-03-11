@@ -36,22 +36,22 @@ public class OI {
 
 		// Driver Joystick Button Actions
 		xBoxA = new JoystickButton(xBoxDriver, RobotMap.xBoxAIndex);
-		xBoxA.whenPressed(new ShootHeld(1));
-		xBoxA.whenReleased(new ShootHeld(0));
+		xBoxA.whenPressed(new StartShooting());
+		xBoxA.whenReleased(new StopShooting());
 		
 		xBoxB = new JoystickButton(xBoxDriver, RobotMap.xBoxBIndex);
-		xBoxB.whenPressed(new GroundIntake(-0.4));
+		
 		xBoxY = new JoystickButton(xBoxDriver, RobotMap.xBoxYIndex);
 		
 		xBoxX = new JoystickButton(xBoxDriver, RobotMap.xBoxXIndex);
 		
 		xBoxRightBump = new JoystickButton(xBoxDriver, RobotMap.xBoxRightBumperIndex);
-		xBoxRightBump.whenPressed(new GroundIntake(-0.4));
-		xBoxRightBump.whenReleased(new GroundIntake(0));
+		xBoxRightBump.whenPressed(new SetIntake(true));
+		xBoxRightBump.whenReleased(new StopIntake());
 		
 		xBoxLeftBump = new JoystickButton(xBoxDriver, RobotMap.xBoxLeftBumperIndex);
-		xBoxLeftBump.whenPressed(new GroundIntake(0.4));
-		xBoxLeftBump.whenReleased(new GroundIntake(0.0));
+		xBoxLeftBump.whenPressed(new SetIntake(false));
+		xBoxLeftBump.whenReleased(new StopIntake());
 		
 		xBoxStart = new JoystickButton(xBoxDriver, RobotMap.xBoxStartButtonIndex);
 		xBoxStart.whenPressed(new SetServo(true));
@@ -74,7 +74,6 @@ public class OI {
 			xBoxTestX = new JoystickButton(xBoxTest, RobotMap.xBoxXIndex);
 			
 			xBoxTestY = new JoystickButton(xBoxTest, RobotMap.xBoxYIndex);
-			xBoxTestY.whenPressed(new IntakeSome(5.0, -0.4));
 			
 			xBoxTestRightBump = new JoystickButton(xBoxTest, RobotMap.xBoxRightBumperIndex);
 			

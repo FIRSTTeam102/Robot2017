@@ -14,51 +14,53 @@ public class Robot extends IterativeRobot {
 	public static IntakeRoller intakeRoller;
 	public static Shooter shooter;
 	public static HopperServo servo;
-
+	//public static Climber climber;
+	
 	protected Command autonomousCommand;
-
+	
 	public void robotInit() {
 		driveTrain = new DriveTrain();
 		intakeRoller = new IntakeRoller();
 		shooter = new Shooter();
 		servo = new HopperServo();
-
+		//climber = new Climber();
+		
 		oi = new OI();
-
+		
 		// autonomousCommand = new Autonomous();
-
+		
 		// Until Vision API is transferred...
 		CameraServer.getInstance().startAutomaticCapture();
 	}
-
+	
 	public void autonomousInit() {
-		if (autonomousCommand != null)
+		if(autonomousCommand != null)
 			autonomousCommand.start();
 	}
-
+	
 	public void teleopInit() {
-		if (autonomousCommand != null)
+		if(autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
-
+	
 	public void disabledInit() {
 	}
-
+	
 	public void testInit() {
 	}
-
+	
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
+	
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
+	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
+	
 	public void testPeriodic() {
 		LiveWindow.run();
 	}

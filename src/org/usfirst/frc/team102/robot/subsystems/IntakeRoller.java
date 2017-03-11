@@ -7,18 +7,30 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class IntakeRoller extends Subsystem {
 	CANTalon intakeRoller;
+	protected double lastSpeed;
 
 	public IntakeRoller() {
 		intakeRoller = new CANTalon(RobotMap.t2CANTalon);
+		intakeRoller.setSafetyEnabled(false);
 	}
 
 	public void roll(double speed) {
 		intakeRoller.set(speed);
-
+		lastSpeed = speed;
 	}
 
-	public void toggle(boolean isReverse) {
-		// TODO implement
+	public void set(boolean reverse) {
+		double speed;
+		
+		if(reverse) {
+			if(lastSpeed >= 0) speed = -1;
+			else speed = 0;
+		} else {
+			if(lastSpeed <= 0) speed = 1;
+			else speed = 0;
+		}
+		
+		roll(speed * RobotMap.ROLLER_SPEED);
 	}
 
 	protected void initDefaultCommand() {
