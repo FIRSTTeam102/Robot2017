@@ -54,14 +54,36 @@ public class DriveTrain extends PIDSubsystem implements CommandUpdate.IUpdate {
 		try {
 			// MotorAmperageHelper.update();
 
+			//Creates Variables
+			double leftX;
+			double leftY;
+			double rightX;
+			
 			if (RobotState.isOperatorControl()) {
-				double leftX = Robot.oi.getDriverJSAxis(RobotMap.xBoxLeftXAxis);
-				double leftY = Robot.oi.getDriverJSAxis(RobotMap.xBoxLeftYAxis);
-				double rightX = Robot.oi.getDriverJSAxis(RobotMap.xBoxRightXAxis);
-
+				
 				// drive(leftX, leftY, -rightY);
 				// DO NOT CHANGE THIS!!! DRIVE TRAIN WORKS NOW!!
+//				if(Robot.oi.isHalfSpeed){
+//					//Half Speed
+//					leftX = RobotMap.xBoxLeftXAxis/2;
+//					leftY = RobotMap.xBoxLeftYAxis/2;
+//					rightX = RobotMap.xBoxRightXAxis/2;
+//					
+//					drive.mecanumDrive_Cartesian(leftX, -rightX, -leftY, 0);
+//					
+//				}else{
+					
+					//Full Speed w/ Deadband
+					leftX = Robot.oi.getDriverJSAxis(RobotMap.xBoxLeftXAxis);
+					leftY = Robot.oi.getDriverJSAxis(RobotMap.xBoxLeftYAxis);
+					rightX = Robot.oi.getDriverJSAxis(RobotMap.xBoxRightXAxis);
+					
+					if (Robot.oi.isHalfSpeed){
+					
+				drive.mecanumDrive_Cartesian(leftX/2, -rightX/2, -leftY/2, 0);
+			}else{
 				drive.mecanumDrive_Cartesian(leftX, -rightX, -leftY, 0);
+			}
 			}
 		} catch (Exception ex1) {
 			ex1.printStackTrace();
@@ -117,23 +139,73 @@ public class DriveTrain extends PIDSubsystem implements CommandUpdate.IUpdate {
 		return getEncoderDistance() >= dist;
 	}
 
-	public void basicForward() {
-		
-		drive.mecanumDrive_Cartesian(.75, 0, 0, 0);
-		
-//		frontLeftTal.set(-.75);
-//		frontRightTal.set(.75);
-//		rearLeftTal.set(-.75);
-//		rearRightTal.set(.75);
+	public void strafeGyro() {
+
+		gyro.calibrate();
+		gyro.reset();
+
+		drive.mecanumDrive_Cartesian(.75, 0, 0, -gyro.getAngle());
 		
 	}
+
+	public void basicStrafe() {
+
+		drive.mecanumDrive_Cartesian(.75, 0, 0, 0);
+
+		// frontLeftTal.set(-.75);
+		// frontRightTal.set(.75);
+		// rearLeftTal.set(-.75);
+		// rearRightTal.set(.75);
+
+	}
 	
-	public void stop(){
-	
+	public void basicStrafeLeft() {
+		drive.mecanumDrive_Cartesian(-0.75, 0, 0, 0);
+	}
+
+	public void stop() {
+
 		frontLeftTal.set(0);
 		frontRightTal.set(0);
 		rearLeftTal.set(0);
 		rearRightTal.set(0);
+
+	}
+	
+	public void autoRotate(){
+		
+		drive.mecanumDrive_Cartesian(0, 0, 0.5, 0);
 		
 	}
+
+public void autoCounterRotate(){
+		
+		drive.mecanumDrive_Cartesian(0, 0, -0.5, 0);
+		
+	}
+	
+	public void autoDriveStraight(){
+	
+//		drive.mecanumDrive_Cartesian(0, .75, 0, 0);
+		
+		System.out.println("I'm doing autoDriveStraight!");
+		
+		frontLeftTal.set(.75);
+		frontRightTal.set(-.75);
+		rearLeftTal.set(.75);
+		rearRightTal.set(-.75);
+		
+	}
+	
+	public void autoDriveBackwards() {
+		
+		System.out.println("I'm doing autoDriveBackwards!");
+		
+		frontLeftTal.set(-.75);
+		frontRightTal.set(.75);
+		rearLeftTal.set(-.75);
+		rearRightTal.set(.75);
+		
+	}
+	
 }

@@ -21,15 +21,19 @@ public class IntakeRoller extends Subsystem {
 
 	public void set(boolean reverse) {
 		double speed;
-		
-		if(reverse) {
-			if(lastSpeed >= 0) speed = -1;
-			else speed = 0;
+
+		if (reverse) {
+			if (lastSpeed >= 0)
+				speed = -1;
+			else
+				speed = 0;
 		} else {
-			if(lastSpeed <= 0) speed = 1;
-			else speed = 0;
+			if (lastSpeed <= 0)
+				speed = 1;
+			else
+				speed = 0;
 		}
-		
+
 		roll(speed * RobotMap.ROLLER_SPEED);
 	}
 

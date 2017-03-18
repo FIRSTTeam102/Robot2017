@@ -31,6 +31,8 @@ public class OI {
 	private JoystickButton xBoxTestRightJoyPress;
 	private JoystickButton xBoxTestLeftJoyPress;
 
+	public static boolean isHalfSpeed = false;
+	
 	public OI() {
 		xBoxDriver = new Joystick(RobotMap.xBoxDriverJoystick);
 
@@ -40,7 +42,8 @@ public class OI {
 		xBoxA.whenReleased(new StopShooting());
 
 		xBoxB = new JoystickButton(xBoxDriver, RobotMap.xBoxBIndex);
-
+		xBoxB.whenPressed(new InvertIsHalfSpeed());
+		
 		xBoxY = new JoystickButton(xBoxDriver, RobotMap.xBoxYIndex);
 		xBoxY.whenPressed(new ClimbSlow());
 		xBoxY.whenReleased(new ClimbStop());
@@ -66,7 +69,8 @@ public class OI {
 		xBoxRightJoyPress = new JoystickButton(xBoxDriver, RobotMap.xBoxRightJoystickPressIndex);
 
 		xBoxLeftJoyPress = new JoystickButton(xBoxDriver, RobotMap.xBoxLeftJoystickPressIndex);
-
+		//xBoxLeftJoyPress.whenReleased(new AutoDriveStraight(10));
+		
 		// Test Joystick Button Action
 		xBoxTest = new Joystick(RobotMap.xBoxTestJoystick);
 
@@ -94,10 +98,17 @@ public class OI {
 
 	public double getDriverJSAxis(int id) {
 		double value = xBoxDriver.getRawAxis(id);
-
-		if (Math.abs(value) < RobotMap.joystickDeadband)
-			return 0;
-		else
-			return value;
-	}
+		
+		if (isHalfSpeed) { //so half the deadband
+			if (Math.abs(value) < (RobotMap.joystickDeadband / 2))
+				return 0;
+			else
+				return value;
+			
+		} else {
+			if (Math.abs(value) < RobotMap.joystickDeadband)
+				return 0;
+			else
+				return value; }
+		}
 }

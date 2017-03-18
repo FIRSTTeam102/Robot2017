@@ -15,6 +15,13 @@ public class BasicAutonomous extends Command {
 		requires(Robot.driveTrain);
 		setTimeout(3);
 	}
+	
+	public BasicAutonomous(double t) {
+		requires(Robot.driveTrain);
+		setTimeout(t);
+		
+	}
+	
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
@@ -22,7 +29,9 @@ public class BasicAutonomous extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrain.basicForward();
+		Robot.driveTrain.basicStrafe();
+		
+		//Robot.driveTrain.strafeGyro();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
