@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class BasicAutonomous extends Command {
 
-	public BasicAutonomous() {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-		requires(Robot.driveTrain);
-		setTimeout(3);
-	}
+//	public BasicAutonomous() {
+//		// Use requires() here to declare subsystem dependencies
+//		// eg. requires(chassis);
+//		requires(Robot.driveTrain);
+//		setTimeout(3);
+//	}
 	
 	public BasicAutonomous(double t) {
 		requires(Robot.driveTrain);
@@ -29,9 +29,9 @@ public class BasicAutonomous extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrain.basicStrafe();
+		//Robot.driveTrain.basicStrafe();
 		
-		//Robot.driveTrain.strafeGyro();
+		Robot.driveTrain.strafeGyro();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

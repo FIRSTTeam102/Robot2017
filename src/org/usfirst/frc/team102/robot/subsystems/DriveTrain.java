@@ -2,7 +2,6 @@ package org.usfirst.frc.team102.robot.subsystems;
 
 import org.usfirst.frc.team102.robot.Robot;
 import org.usfirst.frc.team102.robot.RobotMap;
-import org.usfirst.frc.team102.robot.commands.CommandUpdate;
 
 import com.ctre.CANTalon;
 
@@ -12,8 +11,10 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import micobyte.frc.visionapi.CommandUpdate;
+import micobyte.frc.visionapi.IDrive;
 
-public class DriveTrain extends PIDSubsystem implements CommandUpdate.IUpdate {
+public class DriveTrain extends PIDSubsystem implements CommandUpdate.IUpdate, IDrive.IMechanumDrive {
 	protected RobotDrive drive;
 	protected Gyro gyro;
 	protected boolean isDrivingStraight = false;
@@ -141,11 +142,8 @@ public class DriveTrain extends PIDSubsystem implements CommandUpdate.IUpdate {
 
 	public void strafeGyro() {
 
-		gyro.calibrate();
-		gyro.reset();
-
-		drive.mecanumDrive_Cartesian(.75, 0, 0, -gyro.getAngle());
-		
+		drive.mecanumDrive_Cartesian(.5, 0, 0, -gyro.getAngle());
+		System.out.println("does stuff");
 	}
 
 	public void basicStrafe() {
@@ -207,5 +205,8 @@ public void autoCounterRotate(){
 		rearRightTal.set(.75);
 		
 	}
-	
+
+	public RobotDrive getDrive() {
+		return drive;
+	}
 }

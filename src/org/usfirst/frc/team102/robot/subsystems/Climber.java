@@ -2,11 +2,11 @@ package org.usfirst.frc.team102.robot.subsystems;
 
 import org.usfirst.frc.team102.robot.Robot;
 import org.usfirst.frc.team102.robot.RobotMap;
-import org.usfirst.frc.team102.robot.commands.CommandUpdate;
 
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import micobyte.frc.visionapi.CommandUpdate;
 
 public class Climber extends Subsystem implements CommandUpdate.IUpdate {
 	public static final String NAME = "Climber";

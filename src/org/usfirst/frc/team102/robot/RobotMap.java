@@ -75,4 +75,10 @@ public class RobotMap {
 	
 	// Power constants
 	public static final double MAX_MOTOR_CURRENT = 10;
+	
+	// Vision-related constants
+	public static final int CAM_VISION_DETECTION = 0;
+	public static final int RELAY_INNER_LIGHT_RING = 1, RELAY_OUTER_LIGHT_RING = 0;
+	public static final boolean USE_INNER_LIGHT_RING = true, USE_OUTER_LIGHT_RING = false;
+	public static final boolean VISION_INVERT_X = true, VISION_INVERT_Y = false, VISION_INVERT_ROT = true, VISION_SWAP_XY = true;
 }
