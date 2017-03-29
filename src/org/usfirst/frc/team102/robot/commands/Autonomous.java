@@ -46,8 +46,6 @@ public class Autonomous extends CommandGroup {
 
 			System.out.println("Started Shooting Autonomous for the Blue Alliance");
 
-				System.out.println("Start Blue");
-
 				addSequential(new AutoStrafeLeft()); // strafes left at 1/2
 														// speed for 0.4 seconds
 				addSequential(new AutoLowGoal()); // shoots for 10 seconds
