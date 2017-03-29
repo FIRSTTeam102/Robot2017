@@ -1,49 +1,39 @@
 package org.usfirst.frc.team102.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class Autonomous extends CommandGroup {
 
 	public Autonomous() {
 
-		/*DigitalInput redBlueSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO);// ENABLES
-																				// RED
-																				// OR
-																				// BLUE
-
-		DigitalInput ripSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO_SHOOT); // enables
-																					// the
-																					// RIP
-																					// AUTO
-
-		boolean isRed = !redBlueSwitch.get() // On is Red, Off is Bleu
-		boolean shouldRIP = !ripSwitch.get(); // On is RIP, Off is NO RIP
-
-		redBlueSwitch.free();
-		RIPSwitch.free();
+		DriverStation.Alliance color;
 		
-		// DriverStation.Alliance color =
-		// DriverStation.getInstance().getAlliance();
+		// DigitalInput redBlueSwitch = new
+		// DigitalInput(RobotMap.DIO_ENABLE_AUTO);// ENABLES
+		// // RED
+		// // OR
+		// // BLUE
 		//
-		// System.out.println(color);
+		// DigitalInput ripSwitch = new
+		// DigitalInput(RobotMap.DIO_ENABLE_AUTO_SHOOT); // enables
+		// // the
+		// // RIP
+		// // AUTO
 
-		System.out.println("IsRed Is " + isRed);
+		// boolean isRed = !redBlueSwitch.get() // On is Red, Off is Bleu
+		// boolean shouldRIP = !ripSwitch.get(); // On is RIP, Off is NO RIP
+		//
+		// redBlueSwitch.free();
+		// RIPSwitch.free();
 
-		System.out.println("ShouldRIP Is " + shouldRIP);
+		color = DriverStation.getInstance().getAlliance();
+		System.out.println(color);
 
-		if (isRed) {
+		if (color == DriverStation.Alliance.Red) {
 
-			if (shouldRIP) {
-
-				System.out.println("Start RIP AUTO");
-				addSequential(new AutoStrafeLeft());
-				addSequential(new AutoDriveStraight(2.5));
-
-			} else {
-				System.out.println("Start Red");
-
-				System.out.println("IsRed equals: " + isRed + " and we are within the Red conditional.");
-
+			System.out.println("Started Shooting Autonomous for the Red Alliance");
+			
 				addSequential(new AutoStrafeLeft()); // strafes left at 1/2
 														// speed for 0.4 seconds
 				addSequential(new AutoDriveStraight(.15));
@@ -51,19 +41,10 @@ public class Autonomous extends CommandGroup {
 				addSequential(new AutoStrafeLeft(.5));
 				addSequential(new AutoRotate(2.5));// needed more
 				addSequential(new AutoDriveStraight(1.25));
-			}
-			// addSequential(new BasicAutonomous()); //drives straight;
-			// commented out to test ball shooting autonomous
+			
+		}else if (color == DriverStation.Alliance.Blue){
 
-		} else {
-
-			if (shouldRIP) {
-
-				System.out.println("Start RIP AUTO");
-				addSequential(new AutoStrafeLeft());
-				addSequential(new AutoDriveBackwards(2.5));
-
-			} else {
+			System.out.println("Started Shooting Autonomous for the Blue Alliance");
 
 				System.out.println("Start Blue");
 
@@ -75,11 +56,12 @@ public class Autonomous extends CommandGroup {
 				addSequential(new AutoCounterRotate(1.25));// needed more
 				addSequential(new AutoDriveBackwards(2)); // NEEDS TO BE
 															// BACKWARDS
-			}
-		}*/
+			}else{
 
-		addSequential(new BasicAutonomous(2.6));
-		
+					System.out.println("Could not get alliance color lol");
+				
+			}
+
 		System.out.println("Climb is ready!");
 		addSequential(new ClimbReady());
 
