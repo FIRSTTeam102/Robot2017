@@ -4,12 +4,11 @@ import org.usfirst.frc.team102.robot.commands.Autonomous;
 import org.usfirst.frc.team102.robot.commands.VisionAuto;
 import org.usfirst.frc.team102.robot.subsystems.*;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import micobyte.frc.visionapi.SubsystemCamera;
 
 public class Robot extends IterativeRobot {
@@ -26,7 +25,9 @@ public class Robot extends IterativeRobot {
 	// End of vision stuff
 	
 	// Autonomous chooser
-	protected static SendableChooser<Command> chooser;
+	//protected static SendableChooser<Command> chooser;
+	
+	private final Command gearAuto = new VisionAuto(), shootAuto = new Autonomous();
 	
 	protected Command autonomousCommand;
 	
@@ -44,10 +45,10 @@ public class Robot extends IterativeRobot {
 		
 		oi = new OI();
 		
-		chooser = new SendableChooser<Command>();
-		chooser.addDefault("Autonomous With Vision", new VisionAuto());
-		chooser.addObject("Autonomous Without Vision", new Autonomous());
-		chooser.addObject("Autonomous Disabled", new PrintCommand("Autonomous is selected to be disabled."));
+		//chooser = new SendableChooser<Command>();
+		//chooser.addDefault("Autonomous With Vision", new VisionAuto());
+		//chooser.addObject("Autonomous Without Vision", new Autonomous());
+		//chooser.addObject("Autonomous Disabled", new PrintCommand("Autonomous is selected to be disabled."));
 		
 		//autonomousCommand = new Autonomous();
 		
@@ -56,7 +57,10 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		//autonomousCommand = chooser.getSelected();
+		
+		if(useShootingAuto()) autonomousCommand = shootAuto;
+		else autonomousCommand = gearAuto;
 		
 		if(autonomousCommand != null)
 			autonomousCommand.start();
@@ -87,5 +91,13 @@ public class Robot extends IterativeRobot {
 	
 	public void testPeriodic() {
 		LiveWindow.run();
+	}
+	
+	private boolean useShootingAuto() {
+		DigitalInput shootSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO_SHOOT);
+		boolean shoot = !shootSwitch.get();
+		shootSwitch.free();
+		
+		return shoot;
 	}
 }

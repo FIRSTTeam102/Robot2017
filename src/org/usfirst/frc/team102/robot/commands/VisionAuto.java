@@ -4,7 +4,6 @@ import org.usfirst.frc.team102.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class VisionAuto extends CommandGroup {
 	
@@ -12,19 +11,19 @@ public class VisionAuto extends CommandGroup {
 		super("Autonomous root command");
 		
 		DigitalInput onOffSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO);
-		DigitalInput shootSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO_SHOOT);
+		//DigitalInput shootSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO_SHOOT);
 		DigitalInput leftSwitch = new DigitalInput(RobotMap.DIO_AUTO_POS_LEFT);
 		DigitalInput rightSwitch = new DigitalInput(RobotMap.DIO_AUTO_POS_RIGHT);
 		
 		// Inverted to deal with internal pullup resistors,
 		// so the switch, when on, grounds the DIO (logic 0/false).
 		boolean on = !onOffSwitch.get();
-		boolean shoot = !shootSwitch.get();
+		//boolean shoot = !shootSwitch.get();
 		boolean left = !leftSwitch.get();
 		boolean right = !rightSwitch.get();
 		
 		onOffSwitch.free();
-		shootSwitch.free();
+		//shootSwitch.free();
 		leftSwitch.free();
 		rightSwitch.free();
 		
@@ -68,7 +67,7 @@ public class VisionAuto extends CommandGroup {
 			
 			addSequential(new DriveStraight(RobotMap.AUTO_PLACE_GEAR_REVERSE_DIST, true));
 			
-			if(shoot) {
+			/*if(shoot) {
 				status += ", and shooting";
 				
 				addSequential(new WaitCommand(RobotMap.AUTO_WAIT));
@@ -92,7 +91,7 @@ public class VisionAuto extends CommandGroup {
 				
 				addSequential(new SetServo(true));
 				addSequential(new StartShooting());
-			}
+			}*/
 		} else status = "disabled";
 		
 		System.out.println("Vision Autonomous is " + status + ".");
