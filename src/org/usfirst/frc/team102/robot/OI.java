@@ -31,7 +31,7 @@ public class OI {
 	private JoystickButton xBoxTestRightJoyPress;
 	private JoystickButton xBoxTestLeftJoyPress;
 
-	public static boolean isHalfSpeed = false;
+	public boolean isHalfSpeed = false;
 	
 	public OI() {
 		xBoxDriver = new Joystick(RobotMap.xBoxDriverJoystick);

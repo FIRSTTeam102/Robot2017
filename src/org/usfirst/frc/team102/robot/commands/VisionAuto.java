@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class VisionAuto extends CommandGroup {
 	
-	//TODO implement into current autonomous pipeline
 	public VisionAuto() {
 		super("Autonomous root command");
 		
@@ -76,26 +75,27 @@ public class VisionAuto extends CommandGroup {
 				
 				switch(pos) {
 					case LEFT: {
-						//addSequential(new DriveToBoilerFromLeft());
+						addSequential(new DriveToBoilerFromLeft());
 						break;
 					}
 					
 					case CENTER: {
-						//addSequential(new DriveToBoilerFromCenter());
+						addSequential(new DriveToBoilerFromCenter());
 						break;
 					}
 					
 					case RIGHT: {
-						//addSequential(new DriveToBoilerFromRight());
+						addSequential(new DriveToBoilerFromRight());
 						break;
 					}
-					
-					//addSequential(new Shoot());
 				}
+				
+				addSequential(new SetServo(true));
+				addSequential(new StartShooting());
 			}
 		} else status = "disabled";
 		
-		System.out.println("Autonomous is " + status + ".");
+		System.out.println("Vision Autonomous is " + status + ".");
 	}
 	
 	public static enum EnumPosition { LEFT, RIGHT, CENTER; }
