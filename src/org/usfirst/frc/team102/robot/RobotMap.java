@@ -48,8 +48,8 @@ public class RobotMap {
 	// DIO IDs
 	public static final int DIO_ENABLE_AUTO = 0;// RED OR BLUE
 	public static final int DIO_ENABLE_AUTO_SHOOT = 1; // RIP
-	public static final int DIO_AUTO_POS_RIGHT = 2;
-	public static final int DIO_AUTO_POS_LEFT = 3;
+	public static final int DIO_AUTO_POS_RIGHT = 3;
+	public static final int DIO_AUTO_POS_LEFT = 2;
 	
 	// Config
 	public static final boolean IS_TEST_BED = false;

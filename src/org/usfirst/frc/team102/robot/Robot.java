@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import micobyte.frc.visionapi.SubsystemCamera;
 
 public class Robot extends IterativeRobot {
@@ -25,7 +26,7 @@ public class Robot extends IterativeRobot {
 	// End of vision stuff
 	
 	// Autonomous chooser
-	//protected static SendableChooser<Command> chooser;
+	protected SendableChooser<Command> chooser;
 	
 	private final Command gearAuto = new VisionAuto(), shootAuto = new Autonomous();
 	
@@ -59,8 +60,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		//autonomousCommand = chooser.getSelected();
 		
-		if(useShootingAuto()) autonomousCommand = shootAuto;
-		else autonomousCommand = gearAuto;
+		setAutonomousCommand();
 		
 		if(autonomousCommand != null)
 			autonomousCommand.start();
@@ -93,11 +93,31 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 	}
 	
-	private boolean useShootingAuto() {
-		DigitalInput shootSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO_SHOOT);
-		boolean shoot = !shootSwitch.get();
-		shootSwitch.free();
-		
-		return shoot;
+	private void setAutonomousCommand() {
+		if(chooser == null) {
+			DigitalInput onOffSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO);
+			boolean on = !onOffSwitch.get();
+			onOffSwitch.free();
+			
+			DigitalInput shootSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO_SHOOT);
+			boolean shoot = !shootSwitch.get();
+			shootSwitch.free();
+			
+			if(on) {
+				if(shoot) {
+					autonomousCommand = shootAuto;
+					
+					System.out.println("Using shooting-autonomous");
+				} else {
+					autonomousCommand = gearAuto;
+					
+					System.out.println("Using gear-autonomous.");
+				}
+			} else {
+				autonomousCommand = null;
+				
+				System.out.println("Autnomous disabled.");
+			}
+		} else autonomousCommand = chooser.getSelected();
 	}
 }
