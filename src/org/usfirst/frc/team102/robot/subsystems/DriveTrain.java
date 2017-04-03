@@ -74,6 +74,8 @@ public class DriveTrain extends PIDSubsystem implements CommandUpdate.IUpdate, I
 //					
 //				}else{
 					
+				
+				
 					//Full Speed w/ Deadband
 					leftX = Robot.oi.getDriverJSAxis(RobotMap.xBoxLeftXAxis);
 					leftY = Robot.oi.getDriverJSAxis(RobotMap.xBoxLeftYAxis);
@@ -143,7 +145,7 @@ public class DriveTrain extends PIDSubsystem implements CommandUpdate.IUpdate, I
 	public void strafeGyro() {
 
 		drive.mecanumDrive_Cartesian(.5, 0, 0, -gyro.getAngle());
-		System.out.println("does stuff");
+		System.out.println("doing strafeGyro (.5 speed strafe right w/ negative gyro angle)");
 	}
 
 	public void basicStrafe() {
