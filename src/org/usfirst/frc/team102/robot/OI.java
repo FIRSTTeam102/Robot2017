@@ -31,9 +31,13 @@ public class OI {
 	private JoystickButton xBoxTestRightJoyPress;
 	private JoystickButton xBoxTestLeftJoyPress;
 
+	
+	
 	public boolean isHalfSpeed = false;
 	
 	public OI() {
+		
+		
 		xBoxDriver = new Joystick(RobotMap.xBoxDriverJoystick);
 
 		// Driver Joystick Button Actions
@@ -66,10 +70,13 @@ public class OI {
 		xBoxBack = new JoystickButton(xBoxDriver, RobotMap.xBoxBackButtonIndex);
 		xBoxBack.whenPressed(new SetServo(false));
 
+		
 		xBoxRightJoyPress = new JoystickButton(xBoxDriver, RobotMap.xBoxRightJoystickPressIndex);
-
+		if(RobotMap.useVision) xBoxRightJoyPress.whenPressed(new VisionEnableDisable(true));
+		
 		xBoxLeftJoyPress = new JoystickButton(xBoxDriver, RobotMap.xBoxLeftJoystickPressIndex);
 		//xBoxLeftJoyPress.whenReleased(new AutoDriveStraight(10));
+		if(RobotMap.useVision) xBoxLeftJoyPress.whenPressed(new VisionEnableDisable(false));
 		
 		// Test Joystick Button Action
 		xBoxTest = new Joystick(RobotMap.xBoxTestJoystick);
@@ -100,7 +107,7 @@ public class OI {
 		double value = xBoxDriver.getRawAxis(id);
 		
 		if (isHalfSpeed) { //so half the deadband
-			if (Math.abs(value) < (RobotMap.joystickDeadband / 2))
+			if (Math.abs(value) < (RobotMap.joystickDeadband))
 				return 0;
 			else
 				return value;

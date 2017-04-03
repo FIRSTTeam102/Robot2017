@@ -24,12 +24,12 @@ public class IntakeRoller extends Subsystem {
 
 		if (reverse) {
 			if (lastSpeed >= 0)
-				speed = -1;
+				speed = -0.7;
 			else
 				speed = 0;
 		} else {
 			if (lastSpeed <= 0)
-				speed = 1;
+				speed = 0.7;
 			else
 				speed = 0;
 		}

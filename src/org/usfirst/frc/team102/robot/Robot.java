@@ -1,6 +1,7 @@
 package org.usfirst.frc.team102.robot;
 
 import org.usfirst.frc.team102.robot.commands.Autonomous;
+import org.usfirst.frc.team102.robot.commands.ClimbEasy;
 import org.usfirst.frc.team102.robot.commands.VisionAuto;
 import org.usfirst.frc.team102.robot.subsystems.*;
 
@@ -28,7 +29,10 @@ public class Robot extends IterativeRobot {
 	// Autonomous chooser
 	protected SendableChooser<Command> chooser;
 	
-	private final Command gearAuto = new VisionAuto(), shootAuto = new Autonomous();
+	Command climbingEz;
+	
+	//private Command gearAuto, shootAuto; 
+	//private Command blindAuto; 
 	
 	protected Command autonomousCommand;
 	
@@ -39,10 +43,13 @@ public class Robot extends IterativeRobot {
 		servo = new HopperServo();
 		climber = new Climber();
 		
-		// Vision stuff, please don't change me
-		cam = new SubsystemCamera(RobotMap.CAM_VISION_DETECTION, true, 2000);
-		lights = new Lights();
-		// End of vision stuff
+		if (RobotMap.useVision) {
+			// Vision stuff, please don't change me
+			cam = new SubsystemCamera(RobotMap.CAM_VISION_DETECTION, true, 2000);
+			lights = new Lights();
+		}
+		
+		climbingEz = new ClimbEasy(95.0);
 		
 		oi = new OI();
 		
@@ -51,16 +58,50 @@ public class Robot extends IterativeRobot {
 		//chooser.addObject("Autonomous Without Vision", new Autonomous());
 		//chooser.addObject("Autonomous Disabled", new PrintCommand("Autonomous is selected to be disabled."));
 		
-		//autonomousCommand = new Autonomous();
+	}
+	
+	private void setAutonomousCommand() {
+
+		autonomousCommand = new Autonomous();
 		
-		// Until Vision API is transferred...
-		//CameraServer.getInstance().startAutomaticCapture();
+		//		if (RobotMap.useVision) { 
+//			if(chooser == null) {
+//				// If switch #0 is enabled, autonomous is active
+//				DigitalInput onOffSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO);
+//				boolean on = !onOffSwitch.get();
+//				onOffSwitch.free();
+//				
+//				// If switch #1 is: on = shoot, off = gear
+//				DigitalInput shootSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO_SHOOT);
+//				boolean shoot = !shootSwitch.get();
+//				shootSwitch.free();
+//			
+//				if(on) {
+//					if(shoot) {
+//						autonomousCommand = new Autonomous();//shootAuto;
+//					
+//						System.out.println("Using shooting-autonomous");
+//					} else {
+//						autonomousCommand = new VisionAuto();//gearAuto;
+//					
+//						System.out.println("Using gear-autonomous.");
+//					}
+//				} else {
+//					autonomousCommand = null;
+//				
+//					System.out.println("Autnomous disabled.");
+//				}
+//			} else autonomousCommand = chooser.getSelected(); 
+//		} 
+//		else {//going blind
+//			autonomousCommand = new Autonomous();//blindAuto;
+//		}
 	}
 	
 	public void autonomousInit() {
 		//autonomousCommand = chooser.getSelected();
 		
-		setAutonomousCommand();
+		setAutonomousCommand(); //blindAuto for now
 		
 		if(autonomousCommand != null)
 			autonomousCommand.start();
@@ -69,13 +110,18 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		if(autonomousCommand != null)
 			autonomousCommand.cancel();
+		
+		climbingEz.start();
 	}
 	
 	public void disabledInit() {
+	
+		climbingEz.cancel();
+		
 	}
 	
 	public void testInit() {
-	}
+	}  
 	
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
@@ -93,31 +139,7 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 	}
 	
-	private void setAutonomousCommand() {
-		if(chooser == null) {
-			DigitalInput onOffSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO);
-			boolean on = !onOffSwitch.get();
-			onOffSwitch.free();
-			
-			DigitalInput shootSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO_SHOOT);
-			boolean shoot = !shootSwitch.get();
-			shootSwitch.free();
-			
-			if(on) {
-				if(shoot) {
-					autonomousCommand = shootAuto;
-					
-					System.out.println("Using shooting-autonomous");
-				} else {
-					autonomousCommand = gearAuto;
-					
-					System.out.println("Using gear-autonomous.");
-				}
-			} else {
-				autonomousCommand = null;
-				
-				System.out.println("Autnomous disabled.");
-			}
-		} else autonomousCommand = chooser.getSelected();
-	}
+	
+	
+		
 }

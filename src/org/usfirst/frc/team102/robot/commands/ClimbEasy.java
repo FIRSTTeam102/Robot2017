@@ -8,21 +8,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class BasicAutonomous extends Command {
+public class ClimbEasy extends Command {
 
-//	public BasicAutonomous() {
-//		// Use requires() here to declare subsystem dependencies
-//		// eg. requires(chassis);
-//		requires(Robot.driveTrain);
-//		setTimeout(3);
-//	}
-	
-	public BasicAutonomous(double t) {
-		requires(Robot.driveTrain);
+	boolean isDone = false;
+
+	public ClimbEasy(double t) {
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+		requires(Robot.climber);
 		setTimeout(t);
-		
+
 	}
-	
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
@@ -30,12 +26,18 @@ public class BasicAutonomous extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		//Robot.driveTrain.basicStrafe(); 
-		
 		try{
+		if (isTimedOut() == true) {
+
+			Robot.climber.climbEasy();
+
+		}
 		
-		Robot.driveTrain.strafeGyro();
-		
+		if (DriverStation.getInstance().getMatchTime()-15 == 95) {
+
+			isDone = true;
+
+		}
 		} catch (Exception ex1) {
 			ex1.printStackTrace();
 			DriverStation.reportError(ex1.getMessage(), true);
@@ -45,12 +47,12 @@ public class BasicAutonomous extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return isTimedOut();
+		return isDone;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.driveTrain.stop();
+		Robot.climber.climberStops();
 	}
 
 	// Called when another command which requires one or more of the same

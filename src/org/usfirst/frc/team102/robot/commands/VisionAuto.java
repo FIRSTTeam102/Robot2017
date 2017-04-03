@@ -3,6 +3,7 @@ package org.usfirst.frc.team102.robot.commands;
 import org.usfirst.frc.team102.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class VisionAuto extends CommandGroup {
@@ -14,7 +15,7 @@ public class VisionAuto extends CommandGroup {
 		//DigitalInput shootSwitch = new DigitalInput(RobotMap.DIO_ENABLE_AUTO_SHOOT);
 		DigitalInput leftSwitch = new DigitalInput(RobotMap.DIO_AUTO_POS_LEFT);
 		DigitalInput rightSwitch = new DigitalInput(RobotMap.DIO_AUTO_POS_RIGHT);
-		
+		try{
 		// Inverted to deal with internal pullup resistors,
 		// so the switch, when on, grounds the DIO (logic 0/false).
 		//boolean on = !onOffSwitch.get();
@@ -39,7 +40,7 @@ public class VisionAuto extends CommandGroup {
 			
 			status = "enabled, traveling to the ";
 			
-			addSequential(new DriveStraight(RobotMap.AUTO_DRIVE_DIST));
+			//addSequential(new DriveStraight(RobotMap.AUTO_DRIVE_DIST));
 			
 			switch(pos) {
 				case LEFT: {
@@ -65,7 +66,7 @@ public class VisionAuto extends CommandGroup {
 			// Here's the Vision part
 			addSequential(new Vision());
 			
-			addSequential(new DriveStraight(RobotMap.AUTO_PLACE_GEAR_REVERSE_DIST, true));
+			//addSequential(new DriveStraight(RobotMap.AUTO_PLACE_GEAR_REVERSE_DIST, true));
 			
 			/*if(shoot) {
 				status += ", and shooting";
@@ -95,6 +96,11 @@ public class VisionAuto extends CommandGroup {
 		//} else status = "disabled";
 		
 		System.out.println("Vision Autonomous is " + status + ".");
+		} catch (Exception ex1) {
+			ex1.printStackTrace();
+			DriverStation.reportError(ex1.getMessage(), true);
+
+		}
 	}
 	
 	public static enum EnumPosition { LEFT, RIGHT, CENTER; }

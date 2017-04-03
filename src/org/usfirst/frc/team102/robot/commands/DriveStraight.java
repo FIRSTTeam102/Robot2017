@@ -2,6 +2,7 @@ package org.usfirst.frc.team102.robot.commands;
 
 import org.usfirst.frc.team102.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveStraight extends Command {
@@ -21,7 +22,13 @@ public class DriveStraight extends Command {
 	}
 
 	public void initialize() {
+		try{
 		Robot.driveTrain.enableDriveStraight(reverse);
+		} catch (Exception ex1) {
+			ex1.printStackTrace();
+			DriverStation.reportError(ex1.getMessage(), true);
+
+		}
 	}
 
 	protected boolean isFinished() {

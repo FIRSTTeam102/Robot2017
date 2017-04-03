@@ -2,6 +2,7 @@ package org.usfirst.frc.team102.robot.commands;
 
 import org.usfirst.frc.team102.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Turn extends Command {
@@ -15,9 +16,15 @@ public class Turn extends Command {
 	}
 
 	public void initialize() {
+		try{
 		Robot.driveTrain.setSetpoint(degrees);
 		Robot.driveTrain.enable();
-	}
+		} catch (Exception ex1) {
+			ex1.printStackTrace();
+			DriverStation.reportError(ex1.getMessage(), true);
+
+		}
+		}
 
 	protected boolean isFinished() {
 		return Robot.driveTrain.onTarget();

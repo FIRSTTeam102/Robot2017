@@ -2,6 +2,7 @@ package org.usfirst.frc.team102.robot.commands;
 
 import org.usfirst.frc.team102.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -22,7 +23,13 @@ public class AutoRotate extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	try{
     	Robot.driveTrain.autoRotate();
+    	} catch (Exception ex1) {
+			ex1.printStackTrace();
+			DriverStation.reportError(ex1.getMessage(), true);
+
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()

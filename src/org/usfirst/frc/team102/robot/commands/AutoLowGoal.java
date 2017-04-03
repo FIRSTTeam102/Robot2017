@@ -1,5 +1,6 @@
 package org.usfirst.frc.team102.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -14,9 +15,15 @@ public class AutoLowGoal extends Command {
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		try{
 		Scheduler.getInstance().add(shooterInit);
 		Scheduler.getInstance().add(new SetServo(true));//turns on the shooter
-	}
+		} catch (Exception ex1) {
+			ex1.printStackTrace();
+			DriverStation.reportError(ex1.getMessage(), true);
+
+		}
+		}
 	
 	@Override
 	protected boolean isFinished() {

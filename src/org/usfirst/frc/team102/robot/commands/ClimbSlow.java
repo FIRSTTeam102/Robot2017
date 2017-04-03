@@ -2,6 +2,7 @@ package org.usfirst.frc.team102.robot.commands;
 
 import org.usfirst.frc.team102.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -17,7 +18,13 @@ public class ClimbSlow extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	try{
     	Robot.climber.climbSlow();
+    	} catch (Exception ex1) {
+			ex1.printStackTrace();
+			DriverStation.reportError(ex1.getMessage(), true);
+
+		}
     }
 
     // Called repeatedly when this Command is scheduled to run
