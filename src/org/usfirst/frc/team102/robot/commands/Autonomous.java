@@ -38,7 +38,13 @@ public class Autonomous extends CommandGroup {
 			
 			System.out.println("Doing Gear Wiggle");
 			
-			addSequential(new BasicAutonomous(3.98));//strafe right @ half speed
+			//new code to build up speed and prevent drift
+			addSequential(new BasicAutonomous(0.2, 0.125)); //timeout, speed
+			addSequential(new BasicAutonomous(0.2, 0.325));
+			addSequential(new BasicAutonomous(0.2, 0.5));
+			
+			
+			addSequential(new BasicAutonomous(3.58));//strafe right @ half speed; used to be 3.98
 			
 			//rotate wiggle wip
 			

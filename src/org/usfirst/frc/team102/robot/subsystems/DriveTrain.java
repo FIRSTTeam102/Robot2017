@@ -147,6 +147,10 @@ public class DriveTrain extends PIDSubsystem implements CommandUpdate.IUpdate, I
 		drive.mecanumDrive_Cartesian(.5, 0, 0, -gyro.getAngle());
 		System.out.println("doing strafeGyro (.5 speed strafe right w/ negative gyro angle)");
 	}
+	
+	public void strafeGyro(double speed) {
+		drive.mecanumDrive_Cartesian(speed, 0, 0, -gyro.getAngle());
+	}
 
 	public void basicStrafe() {
 

@@ -16,11 +16,17 @@ public class BasicAutonomous extends Command {
 //		requires(Robot.driveTrain);
 //		setTimeout(3);
 //	}
-	
+	private double speed;
 	public BasicAutonomous(double t) {
 		requires(Robot.driveTrain);
 		setTimeout(t);
-		
+		speed = 0.5;
+	}
+	
+	public BasicAutonomous(double t, double speed) {
+		requires(Robot.driveTrain);
+		setTimeout(t);
+		this.speed = speed;
 	}
 	
 
@@ -34,7 +40,7 @@ public class BasicAutonomous extends Command {
 		
 		try{
 		
-		Robot.driveTrain.strafeGyro();
+		Robot.driveTrain.strafeGyro(speed);
 		
 		} catch (Exception ex1) {
 			ex1.printStackTrace();

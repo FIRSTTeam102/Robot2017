@@ -31,7 +31,7 @@ public class Climber extends Subsystem implements CommandUpdate.IUpdate {
 
 	public void climbSlow() {
 
-		climberTal.set(-.20);
+		climberTal.set(-.40);
 
 	}
 
